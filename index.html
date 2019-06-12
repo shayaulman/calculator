@@ -1,0 +1,55 @@
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+        <div class="calculator">
+            <div class="w-100">
+                <input type="text" autofocus>
+            </div>
+            <div class="w-100">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button class="oper">/</button>
+            </div>
+            <div class="w-100">
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button class="oper">*</button>
+            </div>
+            <div class="w-100">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button class="oper">-</button>
+            </div>
+            <div class="w-100">
+                <button>0</button>
+                <button>.</button>
+                <button class="sum" onclick="sum()">=</button>
+                <button class="oper">+</button>
+            </div>
+            <div class="w-100">
+                <button class="AC" onclick="clearInput()">CE</button>
+                <button class="AC" onclick="clearLast()">C</button>
+            </div>
+        </div>
+
+        <div class="data">
+            <span>history: </span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
