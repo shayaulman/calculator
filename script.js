@@ -16,22 +16,22 @@ document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
 
 input.addEventListener('keydown', function (e) {
        
-    if(e.keyCode === 13){
+    if(e.key === 13){
         sum();
         return;
     };
 
-    if(e.keyCode === 8){
+    if(e.key === 8){
         clearLast();
     };
 
-    if(valitateNum(e.keyCode) && !valitateOper(e.keyCode)){
+    if(valitateNum(e.key) && !valitateOper(e.key)){
         e.preventDefault();
     };
 
-    if(valitateOper(e.keyCode)){
+    if(valitateOper(e.key)){
         e.preventDefault();
-        input.value += ` ${e.keyCode} `;
+        input.value += ` ${e.key} `;
     }
 
 });
