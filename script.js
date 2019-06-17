@@ -15,25 +15,23 @@ document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
 });
 
 input.addEventListener('keydown', function (e) {
-    
-    alert(e.keyCode);
        
-    if(e.which === 13){
+    if(e.keyCode === 13){
         sum();
         return;
     };
 
-    if(e.which === 8){
+    if(e.keyCode === 8){
         clearLast();
     };
 
-    if(valitateNum(e.key) && !valitateOper(e.key)){
+    if(valitateNum(e.keyCode) && !valitateOper(e.keyCode)){
         e.preventDefault();
     };
 
-    if(valitateOper(e.key)){
+    if(valitateOper(e.keyCode)){
         e.preventDefault();
-        input.value += ` ${e.key} `;
+        input.value += ` ${e.keyCode} `;
     }
 
 });
