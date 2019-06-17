@@ -36,6 +36,29 @@ input.addEventListener('keydown', function (e) {
 
 });
 
+input.addEventListener('keyup', function (e) {
+
+    if(e.which === 13){
+        sum();
+        return;
+    };
+
+    if(e.which === 8){
+        clearLast();
+    };
+
+    if(valitateNum(e.key) && !valitateOper(e.key)){
+        e.preventDefault();
+    };
+
+    if(valitateOper(e.key)){
+        e.preventDefault();
+        input.value += ` ${e.key} `;
+    }
+
+});
+
+
 input.onpaste = function(e) {
     e.preventDefault();
 }
