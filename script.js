@@ -1,4 +1,4 @@
-++let rows = 1;
+let rows = 1;
 
 let input = document.querySelector('input');
 let data = document.querySelector('.data');
@@ -17,7 +17,7 @@ document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
 input.addEventListener('keydown', function (e) {
     
     alert(e.key);
-    
+       
     if(e.which === 13){
         sum();
         return;
