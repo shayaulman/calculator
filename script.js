@@ -17,12 +17,12 @@ document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
 
 input.addEventListener('keydown', function (e) {
        
-    if(e.key === 13){
+    if(e.which === 13){
         sum();
         return;
     };
 
-    if(e.key === 8){
+    if(e.which === 8){
         clearLast();
     };
 
