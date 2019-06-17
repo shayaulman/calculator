@@ -3,6 +3,11 @@ let rows = 1;
 let input = document.querySelector('input');
 let data = document.querySelector('.data');
 
+
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    input.type = 'number';
+}
+
 document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
     ele.addEventListener('click', ()=>{
         if(valitateOper(ele.innerHTML)){
