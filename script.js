@@ -26,13 +26,13 @@ input.addEventListener('keydown', function (e) {
         clearLast();
     };
 
-    if(valitateNum(e.key) && !valitateOper(e.key)){
+    if(valitateNum(e.keyCode) && !valitateOper(e.keyCode)){
         e.preventDefault();
     };
 
-    if(valitateOper(e.key)){
+    if(valitateOper(e.keyCode)){
         e.preventDefault();
-        input.value += ` ${e.key} `;
+        input.value += ` ${e.keyCode} `;
     }
 
 });
