@@ -16,7 +16,7 @@ document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
 
 input.addEventListener('keydown', function (e) {
     
-    alert(e.key);
+    alert(e.key + "");
 
     if(e.which === 13){
         sum();
