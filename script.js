@@ -1,72 +1,57 @@
 let rows = 1;
 
-let input = document.querySelector('input');
-let data = document.querySelector('.data');
+const input = document.querySelector('input');
+const data = document.querySelector('.data');
 
-
-document.querySelectorAll('button:not(.sum):not(.AC)').forEach(ele => {
-    ele.addEventListener('click', ()=>{
-        if(valitateOper(ele.innerHTML)){
-            input.value += ` ${ele.innerHTML} `;
-        }else{
-            input.value += ele.innerHTML;
-        }
+document.querySelectorAll('button:not(.sum):not(.AC)').forEach(element => {  // +1 for the great selector 🎉
+    element.addEventListener('click', () => {
+/*   WHY is this necessary?? */
+        // if(valitateOper(ele.innerHTML)){
+            input.value += element.innerHTML;
+        // }else{
+        //     console.log(ele.innerHTML)
+        //     input.value += ele.innerHTML;
+        // }
         input.focus();
     })
 });
 
 input.addEventListener('keydown', function (e) {
-       
-    if(e.which === 13){
-        sum();
-        return;
-    };
+    switch (true) {
+        case e.which === 13:
+            sum();
+            break;
 
-    if(e.which === 8){
-        clearLast();
-    };
+        case e.which === 8:
+            clearLast();
 
-    if(valitateNum(e.keyCode) && !valitateOper(e.keyCode)){
-        e.preventDefault();
-    };
+        case valitateNum(e.keyCode) && !valitateOper(e.keyCode):
+            e.preventDefault();
+            break;
 
-    if(valitateOper(e.keyCode)){
-        e.preventDefault();
-        input.value += ` ${e.keyCode} `;
+        case valitateOper(e.key):
+            e.preventDefault();
+            input.value += `${e.key}`;
+            break;
     }
-
 });
 
-input.onpaste = function(e) {
-    e.preventDefault();
-}
+input.onpaste = (e) => e.preventDefault(); // why do you want to prevent pasting & text selection?
 
-input.addEventListener('select', function() {
+input.addEventListener('select', function() { 
     this.selectionStart = this.selectionEnd;
 }, false);
 
 
-function valitateNum(char){
-    if(isNaN(parseInt(char))){
-        return true;
-    }
-}
+const valitateNum = (char) => isNaN(parseInt(char));
+const valitateOper = (oper) => '/+-*'.includes(oper);
 
-function valitateOper(oper){
-    if(oper == '/' || oper == '+' || oper == '-' || oper == '*'){
-        return true;
-    }
-}
-
-function sum(){
-    let str = input.value;
-    if(str.indexOf('/') >=0 || str.indexOf('-')>=0 || str.indexOf('+')>=0 || str.indexOf('*')>=0){
-        if(str.indexOf('=') == -1){
-            input.value += ` = ${eval(input.value)}`;
-            
-            targetNode.classList.remove('anim');
-            addDataToTable();
-        }
+const sum = () => {
+    const str = input.value;
+    if ( [...str].some(c => '/-+*'.includes(c)) && !str.includes('=') ) {
+        input.value += ` = ${eval(input.value)}`;
+        targetNode.classList.remove('anim');
+        addDataToTable();
     }
     input.focus();
 }
@@ -78,43 +63,40 @@ function addDataToTable(){
             <span class='edit' onclick="editValues(${rows})"><i class="fas fa-edit"></i></span> <span class='delete' onclick="deleteValues(${rows})"><i class="fas fa-trash-alt"></i></span>
         </div>`
     rows++;
-    ;
 }
 
-
-function clearInput(){
+const clearInput = () => {
     input.value = '';
     input.focus();
 }
 
-function clearLast(){
-    let str = input.value;
+const clearLast = () => {
+    const str = input.value;
 
-    if(str.indexOf('=')>=1){
+    if (str.includes('=')) {
         input.value = str.slice(0, str.indexOf('=')-1);
         targetNode.classList.remove('anim');
-    }else{
+    } else {
         input.value = str.slice(0, -1);
     }
     input.focus();
 }
 
-function editValues(id){
+const editValues = (id) => {
     input.value = document.querySelector(`div[data-id="${id}"]>.sum-history`).innerHTML;
     clearLast();
 }
 
-function deleteValues(id){
+const deleteValues = (id) => {
     document.querySelector(`div[data-id="${id}"]`).remove();
 }
 
 
 let targetNode = data;
-
 let config = { attributes: true, childList: true, subtree: true };
 
 let callback = function(mutationsList, observer) {
-    for(let mutation of mutationsList) {
+    for (let mutation of mutationsList) {
         if (mutation.type == 'childList') {
             targetNode.classList.add('anim');
         }
@@ -125,4 +107,3 @@ let callback = function(mutationsList, observer) {
 
 var observer = new MutationObserver(callback);
 observer.observe(targetNode, config);
-
